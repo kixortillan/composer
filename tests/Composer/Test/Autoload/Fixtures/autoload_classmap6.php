@@ -6,6 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'ClassMapBar' => $baseDir . '/lib/rootbar.php',
-    'ClassMapFoo' => $baseDir . '/src/rootfoo.php',
+    'ClassMapBar' => "$baseDir/lib/rootbar.php",
+    'ClassMapFoo' => "$baseDir/src/rootfoo.php",
 );

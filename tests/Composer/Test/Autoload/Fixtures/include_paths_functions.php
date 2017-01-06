@@ -6,10 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    $baseDir . '/lib',
-    $baseDir . '/src',
-    $vendorDir . '/a/a/lib1',
-    $vendorDir . '/a/a/src1',
-    $vendorDir . '/b/b/lib2',
-    $vendorDir . '/c/c/lib3',
+    "$baseDir/lib",
+    "$baseDir/src",
+    "$vendorDir/a/a/lib1",
+    "$vendorDir/a/a/src1",
+    "$vendorDir/b/b/lib2",
+    "$vendorDir/c/c/lib3",
 );

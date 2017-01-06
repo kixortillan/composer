@@ -777,9 +777,9 @@ class AutoloadGeneratorTest extends TestCase
 \$baseDir = dirname(\$vendorDir);
 
 return array(
-    'B\\\\Sub\\\\Name' => array(\$vendorDir . '/b/b/src'),
-    'A\\\\B' => array(\$baseDir . '/lib', \$vendorDir . '/a/a/lib'),
-    'A' => array(\$vendorDir . '/a/a/src'),
+    'B\\\\Sub\\\\Name' => array("\$vendorDir/b/b/src"),
+    'A\\\\B' => array("\$baseDir/lib", "\$vendorDir/a/a/lib"),
+    'A' => array("\$vendorDir/a/a/src"),
 );
 
 EOF;
@@ -807,8 +807,8 @@ EOF;
 \$baseDir = dirname(\$vendorDir);
 
 return array(
-    'A\\\\B\\\\C' => \$baseDir . '/lib/A/B/C.php',
-    'Foo\\\\Bar' => \$baseDir . '/src/classes.php',
+    'A\\\\B\\\\C' => "\$baseDir/lib/A/B/C.php",
+    'Foo\\\\Bar' => "\$baseDir/src/classes.php",
 );
 
 EOF;
@@ -1042,8 +1042,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir).'/working-dir';
 
 return array(
-    'Foo' => array($baseDir . '/src'),
-    'Bar' => array($vendorDir . '/b/b/lib'),
+    'Foo' => array("$baseDir/src"),
+    'Bar' => array("$vendorDir/b/b/lib"),
 );
 
 EOF;
@@ -1057,8 +1057,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir).'/working-dir';
 
 return array(
-    'Acme\\Foo\\' => array($baseDir . '/src-psr4'),
-    'Acme\\Bar\\' => array($vendorDir . '/b/b/lib-psr4'),
+    'Acme\\Foo\\' => array("$baseDir/src-psr4"),
+    'Acme\\Bar\\' => array("$vendorDir/b/b/lib-psr4"),
 );
 
 EOF;
@@ -1072,10 +1072,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir).'/working-dir';
 
 return array(
-    'Bar\\Bar' => $vendorDir . '/b/b/classmaps/classes.php',
-    'Bar\\Foo' => $vendorDir . '/b/b/lib/Bar/Foo.php',
-    'Foo\\Bar' => $baseDir . '/src/Foo/Bar.php',
-    'Foo\\Foo' => $baseDir . '/classmap/classes.php',
+    'Bar\\Bar' => "$vendorDir/b/b/classmaps/classes.php",
+    'Bar\\Foo' => "$vendorDir/b/b/lib/Bar/Foo.php",
+    'Foo\\Bar' => "$baseDir/src/Foo/Bar.php",
+    'Foo\\Foo' => "$baseDir/classmap/classes.php",
 );
 
 EOF;
@@ -1083,8 +1083,8 @@ EOF;
         $this->assertEquals($expectedNamespace, file_get_contents($vendorDir.'/composer/autoload_namespaces.php'));
         $this->assertEquals($expectedPsr4, file_get_contents($vendorDir.'/composer/autoload_psr4.php'));
         $this->assertEquals($expectedClassmap, file_get_contents($vendorDir.'/composer/autoload_classmap.php'));
-        $this->assertContains("\$vendorDir . '/b/b/bootstrap.php',\n", file_get_contents($vendorDir.'/composer/autoload_files.php'));
-        $this->assertContains("\$baseDir . '/test.php',\n", file_get_contents($vendorDir.'/composer/autoload_files.php'));
+        $this->assertContains("\"\$vendorDir/b/b/bootstrap.php\",\n", file_get_contents($vendorDir.'/composer/autoload_files.php'));
+        $this->assertContains("\"\$baseDir/test.php\",\n", file_get_contents($vendorDir.'/composer/autoload_files.php'));
     }
 
     public function testUpLevelRelativePaths()
@@ -1124,7 +1124,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir).'/working-dir';
 
 return array(
-    'Foo' => array($baseDir . '/../src'),
+    'Foo' => array("$baseDir/../src"),
 );
 
 EOF;
@@ -1138,7 +1138,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir).'/working-dir';
 
 return array(
-    'Acme\\Foo\\' => array($baseDir . '/../src-psr4'),
+    'Acme\\Foo\\' => array("$baseDir/../src-psr4"),
 );
 
 EOF;
@@ -1152,8 +1152,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir).'/working-dir';
 
 return array(
-    'Foo\\Bar' => $baseDir . '/../src/Foo/Bar.php',
-    'Foo\\Foo' => $baseDir . '/../classmap/classes.php',
+    'Foo\\Bar' => "$baseDir/../src/Foo/Bar.php",
+    'Foo\\Foo' => "$baseDir/../classmap/classes.php",
 );
 
 EOF;
@@ -1161,7 +1161,7 @@ EOF;
         $this->assertEquals($expectedNamespace, file_get_contents($this->vendorDir.'/composer/autoload_namespaces.php'));
         $this->assertEquals($expectedPsr4, file_get_contents($this->vendorDir.'/composer/autoload_psr4.php'));
         $this->assertEquals($expectedClassmap, file_get_contents($this->vendorDir.'/composer/autoload_classmap.php'));
-        $this->assertContains("\$baseDir . '/../test.php',\n", file_get_contents($this->vendorDir.'/composer/autoload_files.php'));
+        $this->assertContains("\"\$baseDir/../test.php\",\n", file_get_contents($this->vendorDir.'/composer/autoload_files.php'));
     }
 
     public function testEmptyPaths()
@@ -1192,7 +1192,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Foo' => array($baseDir . '/'),
+    'Foo' => array("$baseDir/"),
 );
 
 EOF;
@@ -1206,7 +1206,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Acme\\Foo\\' => array($baseDir . '/'),
+    'Acme\\Foo\\' => array("$baseDir/"),
 );
 
 EOF;
@@ -1220,8 +1220,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Classmap\\Foo' => $baseDir . '/class.php',
-    'Foo\\Bar' => $baseDir . '/Foo/Bar.php',
+    'Classmap\\Foo' => "$baseDir/class.php",
+    'Foo\\Bar' => "$baseDir/Foo/Bar.php",
 );
 
 EOF;
@@ -1254,7 +1254,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Foo' => array($baseDir . '/composer-test-autoload-src/src'),
+    'Foo' => array("$baseDir/composer-test-autoload-src/src"),
 );
 
 EOF;
@@ -1268,7 +1268,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Acme\\Foo\\' => array($baseDir . '/composer-test-autoload-src/src-psr4'),
+    'Acme\\Foo\\' => array("$baseDir/composer-test-autoload-src/src-psr4"),
 );
 
 EOF;
